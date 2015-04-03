@@ -1,0 +1,84 @@
+
+  <div class="col-md-6">
+
+    <h1>Listing stamps</h1>
+    <%= link_to (stamps_path) do %>
+      <%= link_to 'Add Stamp', stamps_path, method: :create, id: "loading-btn", class: "btn btn-primary"  %>
+    <% end %>
+
+    <%= link_to (stamps_path) do %>
+        <%= link_to 'Giveaway', stamps_giveaway_path, method: :giveaway, id: "loading-btn", class: "btn btn-primary"  %>
+    <% end %>
+
+    <%= link_to (stamps_path) do %>
+      <%= link_to 'Damaged', stamps_damage_path, method: :damage, id: "loading-btn", class: "btn btn-primary"  %>
+    <% end %>
+    
+    <br><br>
+
+    <%#= form_tag(stamps_path, :method => "get", id: "search-form") do %>
+      <%#= date_select :search, params[:search], discard_day: true, start_year: Date.today.year, end_year: 2009, prompt: { month: 'Choose month' } %>
+      <%#= submit_tag "Search" %>
+    <%# end %>
+
+  </div>
+
+  <div class="col-md-3"></div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <br>
+    Inventory: <%= @inventory %> <br>
+    Giveaway: <%= @giveaway %> <br>
+    Damaged: <%= @damage %> <br>
+    Total Printed: <%= @stamps.count %>
+    <br><br>
+    <%= render partial: 'stamps/search' %>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Stamp ID</th>
+            <th>Devkit</th>
+            <th>Damaged</th>
+            <th>Giveaway</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody class="table-striped">
+          <% @stamps.each do |stamp| %>
+            <tr>
+              <td><%= stamp.id %></td>
+              <td><%= stamp.devkit %></td>
+              <td><%= stamp.damage %></td>
+              <td><%= stamp.giveaway %></td>
+              <td><%= link_to 'X', stamp, method: :delete %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+
+<script>
+  $(function(){
+      var $btn = $('#loading-btn');
+      $btn.click(function(){
+          var $this = $(this);
+          $this.attr('disabled', 'disabled').html("Loading...");
+          setTimeout(function () {
+              $this.removeAttr('disabled').html('Add Stamp');
+          }, 500)
+      });
+  })
+</script>

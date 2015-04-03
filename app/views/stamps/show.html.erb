@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Devkit:</strong>
+  <%= @stamp.devkit %>
+</p>
+
+<p>
+  <strong>Damage:</strong>
+  <%= @stamp.damage %>
+</p>
+
+<p>
+  <strong>Giveaway:</strong>
+  <%= @stamp.giveaway %>
+</p>
+
+<%= link_to 'Edit', edit_stamp_path(@stamp) %> |
+<%= link_to 'Back', stamps_path %>
